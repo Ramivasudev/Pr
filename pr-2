@@ -1,0 +1,62 @@
+clear all;
+clc;
+m=0;
+l=0;
+Voc=0;
+Isc=0;
+I0=10^-9;
+Ic=0:0.5:40;
+Isc=40-Ic;
+for n=0:0.5:40
+    l=l+1;
+    Voc(l)=(0.0257*log((n/I0)+1))
+    p(l)=Voc(l)*Isc(l);
+end
+Ic1=0:0.5:20;
+Isc1=20-Ic1;
+for n=0:0.5:20
+    m=m+1;
+    Voc1(m)=(0.0257*log((n/I0)+1))
+    p1(m)=Voc1(m)*Isc1(m);
+end
+figure(1)
+plot(Voc,Isc)
+hold
+plot(Voc1,Isc1)
+title('Isc vs Voc (18EE014)');
+xlabel('Voc(Volt)');
+ylabel('Isc(Ampere)');
+legend('Full Sun Radiation','Half Sun Radiation');
+grid;
+figure(2)
+plot(Voc,p)
+hold
+plot(Voc1,p1)
+grid;
+title('P vs Voc (18EE014)');
+xlabel('Voc(Volt)');
+ylabel('P(Watt)');
+legend('Full Sun Radiation','Half Sun Radiation');
+
+
+
+pr 6
+
+
+clc;
+E0=0.96;
+KE=0.00085;
+R=8.3143;
+F=96487;
+pH2=0.13;
+pH2o=1.17;
+pO2=1.3;
+n=1:12;
+for T=700:30:1300;
+    Ecell(T)=E0+(((R*T))/(2*F))log(((pH2)(pO2)^0.5))/(pH2o)
+    Te(T)=T
+end
+plot(Te,Ecell)
+title('V-T Curve,18ee014')
+xlabel('Temperature')
+ylabel('Ecell')
